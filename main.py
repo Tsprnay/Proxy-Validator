@@ -38,6 +38,7 @@ def check_proxy(proxy_data):
         real_ip = response.json()["origin"]
         proxy_ip = proxy.split(':')[0]
         if real_ip == proxy_ip:
+            print(f"Valid proxy: {proxy}")
             return proxy, True
         return proxy, False
     except Exception:
