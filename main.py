@@ -10,8 +10,15 @@ URL = "http://httpbin.org/ip"
 TIMEOUT = (15, 27)
 
 def download_proxy_list(url):
-    response = requests.get(url)
-    return response.text.strip().split('\n')
+    try:
+        session = requests.Session()
+        session.proxies = {}
+        response = session.get(url)
+        response.raise_for_status()
+        return response.text.strip().split('\n')
+    except requests.RequestException as e:
+        print("Error while downloading list:", e)
+        return []
 
 def is_valid_proxy_format(proxy):
     return re.match(r'^\d{1,3}(\.\d{1,3}){3}:\d+$', proxy) is not None
