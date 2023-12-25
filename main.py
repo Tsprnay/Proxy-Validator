@@ -71,7 +71,7 @@ if not os.path.exists(proxies_folder):
 
 for proxy_type, url in proxy_urls.items():
     proxies = download_proxy_list(url)
-    with ThreadPoolExecutor(max_workers=100) as executor:
+    with ThreadPoolExecutor(max_workers=10000) as executor:
         results = executor.map(check_proxy, [(proxy, proxy_types[proxy_type]) for proxy in proxies])
         valid_proxies = [proxy for proxy, valid in results if valid]
         with open(f"{proxies_folder}/valid_{proxy_type}_proxies.txt", "w") as file:
