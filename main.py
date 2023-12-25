@@ -11,13 +11,16 @@ TIMEOUT = (15, 27)
 
 def download_proxy_list(url):
     try:
+        current_proxy = socks.get_default_proxy()
+        socks.set_default_proxy()
         session = requests.Session()
-        session.proxies = {}
         response = session.get(url)
         response.raise_for_status()
+        socks.set_default_proxy(*current_proxy)
         return response.text.strip().split('\n')
-    except requests.RequestException as e:
+    except (requests.exceptions.RequestException, socket.timeout) as e:
         print("Error while downloading list:", e)
+        socks.set_default_proxy(*current_proxy)
         return []
 
 def is_valid_proxy_format(proxy):
