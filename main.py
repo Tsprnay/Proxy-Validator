@@ -47,13 +47,15 @@ def check_proxy(proxy_data):
         else:
             session.proxies = {'http': f'http://{proxy}', 'https': f'https://{proxy}'}
         response = session.get(URL, timeout=TIMEOUT)
-        real_ip = response.json()["origin"]
-        proxy_ip = proxy.split(':')[0]
-        if real_ip == proxy_ip:
-            print(f"Valid proxy: {proxy}")
-            return proxy, True
+        response_json = response.json()
+        if "origin" in response_json:
+            real_ip = response_json["origin"]
+            proxy_ip = proxy.split(':')[0]
+            if real_ip == proxy_ip:
+                print(f"Valid proxy: {proxy}")
+                return proxy, True
         return proxy, False
-    except (requests.exceptions.RequestException, socket.timeout):
+    except Exception:
         return proxy, False
 
 proxy_urls = {
