@@ -11,7 +11,7 @@ URL = "http://httpbin.org/ip"
 TIMEOUT = (15, 27)
 
 def download_proxy_list(url):
-    time.sleep(25)
+    time.sleep(35)
     try:
         session = requests.Session()
         session.proxies = {}
