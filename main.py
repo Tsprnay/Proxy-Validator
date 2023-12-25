@@ -16,11 +16,13 @@ def download_proxy_list(url):
         session = requests.Session()
         response = session.get(url)
         response.raise_for_status()
-        socks.set_default_proxy(*current_proxy)
+        if current_proxy:
+            socks.set_default_proxy(*current_proxy)
         return response.text.strip().split('\n')
     except (requests.exceptions.RequestException, socket.timeout) as e:
         print("Error while downloading list:", e)
-        socks.set_default_proxy(*current_proxy)
+        if current_proxy:
+            socks.set_default_proxy(*current_proxy)
         return []
 
 def is_valid_proxy_format(proxy):
