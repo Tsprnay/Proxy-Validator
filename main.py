@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import socket
 from concurrent.futures import ThreadPoolExecutor
 
@@ -10,6 +11,7 @@ URL = "http://httpbin.org/ip"
 TIMEOUT = (15, 27)
 
 def download_proxy_list(url):
+    time.sleep(25)
     try:
         session = requests.Session()
         session.proxies = {}
