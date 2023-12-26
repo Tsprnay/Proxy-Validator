@@ -7,7 +7,7 @@ import requests
 import socks
 
 URL = "http://httpbin.org/ip"
-TIMEOUT = (15, 27)
+TIMEOUT = (20, 35)
 
 def download_proxy_list(url):
     try:
