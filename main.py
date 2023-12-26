@@ -84,3 +84,21 @@ for proxy_type, url in proxy_urls.items():
         with open(f"{proxies_folder}/valid_{proxy_type}_proxies.txt", "w") as file:
             for proxy in valid_proxies:
                 file.write(proxy + "\n")
+
+all_proxies = set()
+all_proxies_without_ports = set()
+
+for proxy_type in proxy_types:
+    with open(f"{proxies_folder}/valid_{proxy_type}_proxies.txt", "r") as file:
+        for proxy in file:
+            all_proxies.add(proxy.strip())
+            ip = proxy.split(':')[0]
+            all_proxies_without_ports.add(ip)
+
+with open(f"{proxies_folder}/all_valid_proxies.txt", "w") as file:
+    for proxy in sorted(all_proxies):
+        file.write(proxy + "\n")
+
+with open(f"{proxies_folder}/all_no_ports_valid_proxies.txt", "w") as file:
+    for ip in sorted(all_proxies_without_ports):
+        file.write(ip + "\n")
