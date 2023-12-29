@@ -4,7 +4,7 @@ Proxy validates every ~6 hours
 
 ## NOTE⛔
 
-This proxy validator validates proxies from my another repo: [Here](Proxy validates every ~6 hours)
+This proxy validator validates proxies from my another repo: [Here](https://github.com/Tsprnay/Proxy-lists)
 
 ## Link Proxies
 
